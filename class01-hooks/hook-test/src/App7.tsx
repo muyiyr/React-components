@@ -10,7 +10,8 @@ import React, {
 interface RefProps {
     aaa: () => void;
 }
-const WrapedGuang = forwardRef<RefProps>((props, ref) => {
+const WrapedGuang = forwardRef<RefProps, { a: string }>((props, ref) => {
+    const { a } = props;
     const inputRef = useRef<HTMLInputElement>(null);
     useImperativeHandle(
         ref,
@@ -26,6 +27,7 @@ const WrapedGuang = forwardRef<RefProps>((props, ref) => {
     return (
         <div>
             <input ref={inputRef}></input>
+            <div>{a}</div>
         </div>
     );
 });
@@ -40,7 +42,7 @@ function App() {
 
     return (
         <div className="App">
-            <WrapedGuang ref={ref} />
+            <WrapedGuang ref={ref} a={"1111"} />
         </div>
     );
 }
